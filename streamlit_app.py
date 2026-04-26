@@ -1,8 +1,7 @@
 import streamlit as st
 import anthropic
-from dotenv import load_dotenv
 
-load_dotenv()
+client = anthropic.Anthropic(api_key=st.secrets["ANTHROPIC_API_KEY"])
 
 st.set_page_config(page_title="PGA Golf Predictor")
 st.title("PGA Tour Predictor")
@@ -11,7 +10,6 @@ st.caption("Powered by Claude AI + live web search")
 question = st.text_area("What do you want to know?", "Predict the top 10 finishers for next weeks PGA Tour event with scores.", height=100)
 
 if st.button("Run prediction", type="primary"):
-    client = anthropic.Anthropic()
     messages = [{"role": "user", "content": question}]
     search_list = []
     search_display = st.empty()
